@@ -15,7 +15,7 @@ Instead of creating a traditional textbook-style timeline, I want to turn Earth'
 
 The homepage will show the four eons as four different regions on a map. Users can choose any region and enter that period of Earth's history.
 
-Each eon will begin with **one or two main interactive experiences** based on the most important event or transformation of that period. After the interaction, users can explore a timeline and learn more about the geological and biological events that happened during that time.
+In each detailed page, users can explore a timeline and learn more about the geological and biological events that happened during that time.
 
 The experience will eventually lead to the present day, where the journey ends and the user returns to the map.
 
