@@ -1,7 +1,6 @@
 # The Map of Life
 
-The Map of Life is my midterm project for Introduction to Web Development. It
-uses a pixel-art map to introduce four major eons in Earth's history. Each
+The Map of Life uses a pixel-art map to introduce four major eons in Earth's history. Each
 island leads to a page with a short overview, timeline, facts, sources, and a
 video.
 
