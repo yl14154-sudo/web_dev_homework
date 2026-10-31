@@ -1,0 +1,164 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An illustrated journey through 4.54 billion years of Earth history.">
+
+    <title>The Map of Life | Deep Time Explorer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="map-page">
+
+    <header class="map-topbar">
+        <a class="mini-brand" href="index.html">
+            <span class="tiny-globe" aria-hidden="true"></span>
+            THE MAP OF LIFE
+        </a>
+        <a class="topbar-link" href="#contact">CONTACT</a>
+    </header>
+
+    <main class="ocean-map">
+        <img
+            class="map-art"
+            src="assets/earth-map-pixel.png"
+            alt="Pixel art ocean map with four geological islands"
+        >
+
+        <a
+            class="island-link hadean-link"
+            href="hadean.html"
+            aria-label="Explore the Hadean, 4.54 to 4.0 billion years ago"
+        >
+            <span>HADEAN</span>
+            <small>4.54–4.0 BYA</small>
+        </a>
+
+        <a
+            class="island-link archean-link"
+            href="archean.html"
+            aria-label="Explore the Archean, 4.0 to 2.5 billion years ago"
+        >
+            <span>ARCHEAN</span>
+            <small>4.0–2.5 BYA</small>
+        </a>
+
+        <a
+            class="island-link proterozoic-link"
+            href="proterozoic.html"
+            aria-label="Explore the Proterozoic, 2.5 billion to 538.8 million years ago"
+        >
+            <span>PROTEROZOIC</span>
+            <small>2.5 BYA–538.8 MYA</small>
+        </a>
+
+        <a
+            class="island-link phanerozoic-link"
+            href="phanerozoic.html"
+            aria-label="Explore the Phanerozoic, 538.8 million years ago to today"
+        >
+            <span>PHANEROZOIC</span>
+            <small>538.8 MYA–NOW</small>
+        </a>
+
+        <section class="quest-card" aria-labelledby="map-title">
+            <span class="quest-globe" aria-hidden="true"></span>
+
+            <p class="kicker">DEEP TIME ATLAS</p>
+
+            <h1 id="map-title">
+                THE MAP<br>
+                OF LIFE
+            </h1>
+
+            <div class="rule"></div>
+
+            <p>
+                A playable path through<br>
+                4.54 billion years of Earth.
+            </p>
+
+            <a class="pixel-button coral" href="hadean.html">
+                BEGIN JOURNEY <span>→</span>
+            </a>
+        </section>
+
+        <p class="map-instruction">
+            CHOOSE AN ISLAND TO EXPLORE
+        </p>
+    </main>
+
+    <section class="how-to">
+        <div>
+            <p class="kicker">YOUR FIELD GUIDE</p>
+            <h2>
+                Four worlds.<br>
+                One planet.
+            </h2>
+        </div>
+
+        <p>
+            Earth did not become a living world all at once. Follow the
+            islands in order to see a molten young planet cool, grow oceans,
+            breathe oxygen, and finally bloom with visible life.
+        </p>
+
+        <p>
+            Each stop has a short field note, a hand-built pixel scene,
+            a timeline of turning points, and a video path for deeper learning.
+        </p>
+    </section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div>
+            <p class="kicker">CONTACT</p>
+            <h2 id="contact-title">GET IN TOUCH</h2>
+            <p>
+                Have a question or suggestion about the site? Leave a message
+                in the project repository.
+            </p>
+        </div>
+
+        <form
+            class="contact-form"
+            action="https://github.com/yl14154-sudo/web_dev_homework/issues/new"
+            method="get"
+            target="_blank"
+        >
+            <label for="contact-subject">SUBJECT</label>
+            <input
+                id="contact-subject"
+                name="title"
+                type="text"
+                placeholder="What did you find?"
+                required
+            >
+
+            <label for="contact-message">MESSAGE</label>
+            <textarea
+                id="contact-message"
+                name="body"
+                rows="5"
+                placeholder="Write your field note here."
+                required
+            ></textarea>
+
+            <button class="pixel-button coral" type="submit">
+                SEND MESSAGE <span aria-hidden="true">↗</span>
+            </button>
+        </form>
+    </section>
+
+    <footer class="site-footer">
+        <span>THE MAP OF LIFE</span>
+        <span>Built as a learning expedition through geologic time.</span>
+    </footer>
+
+</body>
+</html>

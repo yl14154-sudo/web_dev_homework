@@ -1,0 +1,1210 @@
+:root {
+  --ink: #201d2d;
+  --cream: #fff0cf;
+  --cream-line: #f7c990;
+  --paper-shadow: #d8a679;
+  --coral: #df5a49;
+  --line: #392d42;
+  --ocean: #087eb1;
+  --footer: #25283d;
+  --warm-white: #fff9e8;
+  --muted: #77534d;
+  --sand: #ffe0a7;
+  --button-shadow: #663534;
+
+  --pixel: "Press Start 2P", monospace;
+  --body: "Nunito", sans-serif;
+}
+
+/* Basic styles */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--ink);
+  background: #0781b5;
+  font-family: var(--body);
+  font-weight: 700;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 4px solid var(--warm-white);
+  outline-offset: 3px;
+}
+
+
+/* Shared pixel elements */
+
+.mini-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 15px;
+  border: 4px solid var(--line);
+  background: var(--cream);
+  box-shadow:
+    5px 5px 0 rgba(28, 24, 43, .48),
+    inset 0 0 0 3px #f1bd89;
+  font-family: var(--pixel);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.tiny-globe,
+.quest-globe {
+  display: inline-block;
+  border: 3px solid #2d4051;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    #36c6e5 0 40%,
+    #4caa65 40% 58%,
+    #ece47f 58% 70%,
+    #36c6e5 70%
+  );
+  box-shadow: 2px 2px 0 var(--warm-white);
+}
+
+.tiny-globe {
+  width: 24px;
+  height: 24px;
+}
+
+.kicker {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-family: var(--pixel);
+  font-size: 9px;
+  letter-spacing: .2px;
+  line-height: 1.5;
+}
+
+.pixel-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 17px 20px;
+  border: 4px solid var(--line);
+  color: #fff9e9;
+  box-shadow: 4px 4px 0 var(--button-shadow);
+  font-family: var(--pixel);
+  font-size: 11px;
+  line-height: 1.25;
+  transition: transform .12s, box-shadow .12s;
+}
+
+.pixel-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--button-shadow);
+}
+
+.pixel-button.coral {
+  background: var(--coral);
+}
+
+.pixel-button span {
+  font-size: 16px;
+}
+
+
+/* Home page */
+
+.map-page {
+  overflow-x: hidden;
+  background: var(--ocean);
+}
+
+.map-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 72px;
+  padding: 14px 22px;
+  pointer-events: none;
+}
+
+.map-topbar .mini-brand {
+  pointer-events: auto;
+}
+
+.topbar-link {
+  padding: 12px 14px;
+  border: 4px solid var(--line);
+  background: var(--cream);
+  box-shadow: 4px 4px 0 rgba(28, 24, 43, .48);
+  font-family: var(--pixel);
+  font-size: 9px;
+  pointer-events: auto;
+}
+
+.ocean-map {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #077bb0;
+}
+
+.map-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.quest-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: min(420px, calc(100vw - 44px));
+  padding: 29px 35px 31px;
+  transform: translate(-50%, -45%);
+  border: 5px solid var(--line);
+  background: var(--cream);
+  box-shadow:
+    9px 9px 0 rgba(24, 25, 42, .6),
+    inset 0 0 0 5px #f7ca95;
+  text-align: center;
+}
+
+.quest-globe {
+  position: absolute;
+  top: 14px;
+  left: calc(50% - 26px);
+  width: 52px;
+  height: 52px;
+}
+
+.quest-card .kicker {
+  margin-top: 48px;
+}
+
+.quest-card h1 {
+  margin: 0;
+  color: var(--warm-white);
+  font-family: var(--pixel);
+  font-size: clamp(29px, 4vw, 45px);
+  letter-spacing: -2px;
+  line-height: 1.25;
+  text-shadow: 3px 3px 0 #ecb681;
+  -webkit-text-stroke: 2px var(--line);
+}
+
+.rule {
+  position: relative;
+  height: 3px;
+  margin: 18px 0 13px;
+  background: #bd9277;
+}
+
+.rule::after {
+  content: "◆";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0 8px;
+  transform: translate(-50%, -58%);
+  background: var(--cream);
+  color: #80584d;
+}
+
+.quest-card p:not(.kicker) {
+  margin: 0 0 21px;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+
+/* Island links */
+
+.island-link {
+  position: absolute;
+  z-index: 4;
+  width: 190px;
+  padding: 11px 9px 8px;
+  border: 4px solid var(--line);
+  background: var(--cream);
+  box-shadow:
+    4px 4px 0 rgba(37, 29, 41, .5),
+    inset 0 0 0 3px #f0bc88;
+  text-align: center;
+  transition: transform .15s, filter .15s;
+}
+
+.island-link::after {
+  content: "◆";
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--line);
+  font-size: 16px;
+  text-shadow: 0 2px var(--warm-white);
+}
+
+.island-link:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter: brightness(1.07);
+}
+
+.island-link span,
+.island-link small {
+  display: block;
+  font-family: var(--pixel);
+}
+
+.island-link span {
+  font-size: 13px;
+}
+
+.island-link small {
+  margin-top: 7px;
+  font-size: 8px;
+}
+
+.hadean-link {
+  top: 18%;
+  left: 15.5%;
+}
+
+.archean-link {
+  top: 24%;
+  right: 10%;
+}
+
+.proterozoic-link {
+  bottom: 22%;
+  left: 20.5%;
+}
+
+.phanerozoic-link {
+  right: 14%;
+  bottom: 23%;
+}
+
+.map-instruction {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  z-index: 2;
+  margin: 0;
+  transform: translateX(-50%);
+  color: #edfbf4;
+  font-family: var(--pixel);
+  font-size: 9px;
+  text-shadow: 2px 2px 0 #07547e;
+  white-space: nowrap;
+}
+
+
+/* Introduction and footer */
+
+.how-to {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: 44px;
+  min-height: 310px;
+  padding: 70px max(7vw, 26px);
+  border-top: 6px solid var(--line);
+  background: var(--cream);
+}
+
+.how-to h2 {
+  margin: 0;
+  font-family: var(--pixel);
+  font-size: clamp(25px, 3vw, 38px);
+  line-height: 1.38;
+}
+
+.how-to p:not(.kicker) {
+  margin: 35px 0 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 25px 7vw;
+  background: var(--footer);
+  color: var(--cream);
+  font-family: var(--pixel);
+  font-size: 8px;
+  line-height: 1.6;
+}
+
+
+/* Contact */
+
+.contact-section {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(320px, 1.15fr);
+  gap: 54px;
+  padding: 70px max(7vw, 26px);
+  border-top: 6px solid var(--line);
+  background: var(--sand);
+}
+
+.contact-section h2 {
+  max-width: 620px;
+  margin: 0 0 18px;
+  font-family: var(--pixel);
+  font-size: clamp(20px, 2.5vw, 32px);
+  line-height: 1.45;
+}
+
+.contact-section p:not(.kicker) {
+  max-width: 520px;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 24px;
+  border: 5px solid var(--line);
+  background: var(--cream);
+  box-shadow: 7px 7px 0 rgba(37, 29, 41, .45);
+}
+
+.contact-form label {
+  margin-top: 4px;
+  font-family: var(--pixel);
+  font-size: 8px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 3px solid var(--line);
+  border-radius: 0;
+  background: #fffaf0;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.contact-form input {
+  min-height: 48px;
+  padding: 10px 12px;
+}
+
+.contact-form textarea {
+  min-height: 130px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.contact-form .pixel-button {
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.site-footer span:last-child {
+  opacity: .75;
+  text-align: right;
+}
+
+
+/* Geological detail pages */
+
+.detail-page {
+  min-height: 100vh;
+  background: var(--ocean);
+}
+
+.detail-page[data-eon="hadean"] {
+  --eon: #e45a3f;
+  --eon-deep: #542d36;
+}
+
+.detail-page[data-eon="archean"] {
+  --eon: #749a48;
+  --eon-deep: #344f42;
+}
+
+.detail-page[data-eon="proterozoic"] {
+  --eon: #73b7e5;
+  --eon-deep: #385a83;
+}
+
+.detail-page[data-eon="phanerozoic"] {
+  --eon: #51a66e;
+  --eon-deep: #31594a;
+}
+
+.detail-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--ocean);
+}
+
+
+/* Detail page header */
+
+.detail-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1120px, calc(100% - 30px));
+  margin: 16px auto 0;
+  padding: 10px 18px;
+  border: 4px solid var(--line);
+  background: var(--cream);
+  box-shadow: 5px 5px 0 rgba(37, 29, 41, .55);
+}
+
+.detail-header .mini-brand {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.detail-nav {
+  display: flex;
+  gap: 6px;
+}
+
+.detail-nav a {
+  padding: 11px 8px;
+  font-family: var(--pixel);
+  font-size: 7px;
+}
+
+.detail-nav a:hover,
+.detail-nav a[aria-current="page"] {
+  color: var(--warm-white);
+  background: var(--eon);
+  box-shadow: inset 0 -3px 0 var(--eon-deep);
+}
+
+
+/* Hero section */
+
+.eon-main {
+  width: min(1120px, calc(100% - 30px));
+  margin: 38px auto 56px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  align-items: center;
+  gap: 36px;
+  margin-bottom: 32px;
+}
+
+.pixel-scene {
+  height: 340px;
+  margin: 0;
+  overflow: hidden;
+  border: 5px solid var(--line);
+  background: #1c2e44;
+  box-shadow: 7px 7px 0 rgba(33, 26, 40, .55);
+  line-height: 0;
+}
+
+.pixel-scene img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.eon-title-card {
+  min-width: 0;
+  padding: 31px 33px;
+  border: 5px solid var(--line);
+  background: var(--cream);
+  box-shadow:
+    7px 7px 0 rgba(37, 29, 41, .55),
+    inset 0 0 0 5px var(--cream-line);
+}
+
+.eon-title-card h1 {
+  margin: 4px 0 13px;
+  color: var(--warm-white);
+  font-family: var(--pixel);
+  font-size: clamp(21px, 2.2vw, 28px);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-shadow: 3px 3px 0 var(--paper-shadow);
+  -webkit-text-stroke: 2px var(--line);
+}
+
+.age {
+  margin: 0 0 21px;
+  color: var(--eon-deep);
+  font-family: var(--pixel);
+  font-size: 10px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.eon-title-card > p:last-of-type {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+
+/* Content cards */
+
+.section-card {
+  margin: 22px 0;
+  padding: 26px;
+  border: 5px solid var(--line);
+  background: var(--cream);
+  box-shadow:
+    7px 7px 0 rgba(37, 29, 41, .55),
+    inset 0 0 0 5px var(--cream-line);
+}
+
+.section-card h2 {
+  margin: 0 0 20px;
+  padding-bottom: 17px;
+  border-bottom: 3px solid #cba178;
+  font-family: var(--pixel);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.section-card h2 .badge {
+  display: inline-grid;
+  width: 27px;
+  height: 27px;
+  margin-right: 11px;
+  place-items: center;
+  border: 3px solid var(--line);
+  background: var(--eon);
+  color: var(--warm-white);
+  font-size: 12px;
+}
+
+.field-note {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.field-note p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.era-token {
+  display: block;
+  width: 140px;
+  height: 102px;
+  padding: 0;
+  border: 4px solid var(--line);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: 4px 4px 0 var(--eon-deep);
+}
+
+.detail-page[data-eon="hadean"] .era-token {
+  background-image: url("../assets/hadean-about.png");
+}
+
+.detail-page[data-eon="archean"] .era-token {
+  background-image: url("../assets/archean-about.png");
+}
+
+.detail-page[data-eon="proterozoic"] .era-token {
+  background-image: url("../assets/proterozoic-about.png");
+}
+
+.detail-page[data-eon="phanerozoic"] .era-token {
+  background-image: url("../assets/phanerozoic-about.png");
+}
+
+
+/* Video section */
+
+.watch-grid {
+  display: grid;
+  grid-template-columns: 1.6fr .8fr;
+  gap: 25px;
+  align-items: center;
+}
+
+.video-portal {
+  display: grid;
+  min-height: 190px;
+  place-content: center;
+  border: 4px solid var(--line);
+  background: linear-gradient(135deg, var(--eon-deep), #21233b);
+  color: var(--warm-white);
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, .11);
+  text-align: center;
+}
+
+.play-disc {
+  display: grid;
+  width: 66px;
+  height: 66px;
+  margin: auto auto 13px;
+  place-content: center;
+  border: 4px solid #fff0cf;
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 4px 4px 0 var(--line);
+  font-family: var(--pixel);
+  font-size: 19px;
+}
+
+.video-portal span {
+  font-family: var(--pixel);
+  font-size: 10px;
+}
+
+.watch-copy {
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.watch-copy .pixel-button {
+  margin-top: 15px;
+  padding: 14px;
+  font-size: 9px;
+}
+
+
+/* Timeline */
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 49px;
+  right: 5%;
+  left: 5%;
+  height: 4px;
+  background: var(--line);
+}
+
+.event {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.event .dot {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 40px auto 13px;
+  transform: rotate(45deg);
+  border: 3px solid var(--line);
+  background: var(--eon);
+}
+
+.event time {
+  display: block;
+  min-height: 30px;
+  font-family: var(--pixel);
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.event p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.event .event-art {
+  height: 76px;
+  margin: 11px 2px 0;
+  overflow: hidden;
+  border: 3px solid var(--line);
+  background-color: var(--eon-deep);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+
+/* Timeline images */
+
+.detail-page[data-eon="hadean"] .event:nth-child(1) .event-art {
+  background-image: url("../assets/hadean-event-1.png");
+}
+
+.detail-page[data-eon="hadean"] .event:nth-child(2) .event-art {
+  background-image: url("../assets/hadean-event-2.png");
+}
+
+.detail-page[data-eon="hadean"] .event:nth-child(3) .event-art {
+  background-image: url("../assets/hadean-event-3.png");
+}
+
+.detail-page[data-eon="hadean"] .event:nth-child(4) .event-art {
+  background-image: url("../assets/hadean-event-4.png");
+}
+
+.detail-page[data-eon="archean"] .event:nth-child(1) .event-art {
+  background-image: url("../assets/archean-event-1.png");
+}
+
+.detail-page[data-eon="archean"] .event:nth-child(2) .event-art {
+  background-image: url("../assets/archean-event-2.png");
+}
+
+.detail-page[data-eon="archean"] .event:nth-child(3) .event-art {
+  background-image: url("../assets/archean-event-3.png");
+}
+
+.detail-page[data-eon="archean"] .event:nth-child(4) .event-art {
+  background-image: url("../assets/archean-event-4.png");
+}
+
+.detail-page[data-eon="proterozoic"] .event:nth-child(1) .event-art {
+  background-image: url("../assets/proterozoic-event-1.png");
+}
+
+.detail-page[data-eon="proterozoic"] .event:nth-child(2) .event-art {
+  background-image: url("../assets/proterozoic-event-2.png");
+}
+
+.detail-page[data-eon="proterozoic"] .event:nth-child(3) .event-art {
+  background-image: url("../assets/proterozoic-event-3.png");
+}
+
+.detail-page[data-eon="proterozoic"] .event:nth-child(4) .event-art {
+  background-image: url("../assets/proterozoic-event-4.png");
+}
+
+.detail-page[data-eon="phanerozoic"] .event:nth-child(1) .event-art {
+  background-image: url("../assets/phanerozoic-event-1.png");
+}
+
+.detail-page[data-eon="phanerozoic"] .event:nth-child(2) .event-art {
+  background-image: url("../assets/phanerozoic-event-2.png");
+}
+
+.detail-page[data-eon="phanerozoic"] .event:nth-child(3) .event-art {
+  background-image: url("../assets/phanerozoic-event-3.png");
+}
+
+.detail-page[data-eon="phanerozoic"] .event:nth-child(4) .event-art {
+  background-image: url("../assets/phanerozoic-event-4.png");
+}
+
+.timeline-note {
+  margin: 21px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* Facts and sources */
+
+.fact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.fact {
+  min-height: 154px;
+  padding: 17px;
+  border: 3px solid var(--line);
+  background: var(--sand);
+}
+
+.fact h3 {
+  margin: 0 0 12px;
+  color: var(--eon-deep);
+  font-family: var(--pixel);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.fact p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.sources {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.sources a {
+  color: #75423b;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.back-map {
+  display: inline-flex;
+  margin-top: 10px;
+}
+
+.mobile-map {
+  display: none;
+}
+
+
+/* Tablet */
+
+@media (min-width: 821px) and (max-width: 1100px) {
+  .proterozoic-link,
+  .phanerozoic-link {
+    bottom: 10%;
+  }
+}
+
+@media (max-width: 960px) {
+  .detail-nav {
+    gap: 2px;
+  }
+
+  .detail-nav a {
+    padding-inline: 5px;
+    font-size: 6px;
+  }
+
+  .hero-grid {
+    gap: 24px;
+  }
+
+  .eon-title-card {
+    padding-inline: 25px;
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 820px) {
+  .map-topbar {
+    padding: 12px;
+  }
+
+  .mini-brand {
+    padding: 11px;
+    font-size: 10px;
+  }
+
+  .ocean-map {
+    min-height: 780px;
+  }
+
+  .map-art {
+    object-position: center;
+    filter: saturate(1.05);
+  }
+
+  .quest-card {
+    top: 51%;
+    padding: 24px 20px;
+    transform: translate(-50%, -50%);
+  }
+
+  .quest-globe {
+    top: 12px;
+  }
+
+  .quest-card h1 {
+    font-size: 28px;
+  }
+
+  .hadean-link {
+    top: 13%;
+    left: 6%;
+  }
+
+  .archean-link {
+    top: 18%;
+    right: 4%;
+  }
+
+  .proterozoic-link {
+    bottom: 17%;
+    left: 5%;
+  }
+
+  .phanerozoic-link {
+    right: 4%;
+    bottom: 17%;
+  }
+
+  .island-link {
+    width: 136px;
+    padding: 8px 5px;
+  }
+
+  .island-link span {
+    font-size: 9px;
+  }
+
+  .island-link small {
+    margin-top: 5px;
+    font-size: 6px;
+  }
+
+  .map-instruction {
+    bottom: 12px;
+    font-size: 7px;
+  }
+
+  .how-to {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    padding: 52px 26px;
+  }
+
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 52px 26px;
+  }
+
+  .how-to p:not(.kicker) {
+    margin: 12px 0;
+    font-size: 16px;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
+
+  .site-footer span:last-child {
+    text-align: left;
+  }
+
+  .detail-header {
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    padding: 10px 11px;
+  }
+
+  .detail-header .mini-brand {
+    font-size: 9px;
+  }
+
+  .detail-header .tiny-globe {
+    width: 20px;
+    height: 20px;
+  }
+
+  .detail-nav {
+    display: none;
+  }
+
+  .mobile-map {
+    display: inline;
+    font-family: var(--pixel);
+    font-size: 8px;
+  }
+
+  .eon-main {
+    width: calc(100% - 20px);
+    margin-top: 25px;
+  }
+
+  .hero-grid,
+  .field-note,
+  .watch-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .pixel-scene {
+    height: 260px;
+  }
+
+  .eon-title-card {
+    padding: 26px 22px;
+  }
+
+  .era-token {
+    width: 100%;
+    height: 160px;
+  }
+
+  .timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px;
+  }
+
+  .timeline::before {
+    display: none;
+  }
+
+  .event .dot {
+    margin: 0 auto 10px;
+  }
+
+  .event time {
+    min-height: 0;
+  }
+
+  .section-card {
+    padding: 20px 16px;
+  }
+
+  .section-card h2 {
+    font-size: 13px;
+  }
+
+  .fact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quest-card .pixel-button {
+    padding: 15px 12px;
+    font-size: 9px;
+  }
+}
+
+
+/* Smaller phones */
+
+@media (max-width: 420px) {
+  .map-topbar .mini-brand {
+    max-width: calc(100vw - 24px);
+    overflow: hidden;
+    font-size: 8px;
+    white-space: nowrap;
+  }
+
+  .quest-card {
+    width: calc(100vw - 28px);
+  }
+
+  .quest-card h1 {
+    font-size: 24px;
+  }
+
+  .island-link {
+    width: 118px;
+  }
+
+  .island-link span {
+    font-size: 8px;
+  }
+
+  .island-link small {
+    font-size: 5px;
+  }
+
+  .topbar-link {
+    padding: 10px 8px;
+    font-size: 7px;
+  }
+
+  .contact-section {
+    padding-inline: 18px;
+  }
+
+  .contact-form {
+    padding: 18px 14px;
+  }
+
+  .contact-form .pixel-button {
+    padding-inline: 10px;
+    font-size: 8px;
+  }
+
+  .detail-header .mini-brand {
+    gap: 6px;
+    font-size: 7px;
+  }
+
+  .detail-header .tiny-globe {
+    width: 17px;
+    height: 17px;
+    border-width: 2px;
+  }
+
+  .mobile-map {
+    font-size: 7px;
+  }
+
+  .eon-title-card h1 {
+    font-size: 20px;
+  }
+
+  .section-card h2 {
+    font-size: 11px;
+  }
+
+  .section-card h2 .badge {
+    width: 24px;
+    height: 24px;
+    margin-right: 7px;
+    font-size: 10px;
+  }
+
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .event .event-art {
+    height: 96px;
+  }
+}
