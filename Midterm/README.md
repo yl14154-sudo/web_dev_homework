@@ -26,7 +26,13 @@ the information clear and keeping all five pages responsive.
 
 ## Original wireframe
 
-![Original sitemap and wireframe for The Map of Life](assets/wireframe.png)
+### Home page
+
+![Home page wireframe with four geological islands](assets/wireframe-home.png)
+
+### Detail page
+
+![Detail page wireframe with hero, video, timeline, and image sections](assets/wireframe-detail.png)
 
 The full Week 04 proposal is also preserved in the repository at
 [`week04/midterm proposal.md`](../week04/midterm%20proposal.md).
