@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love Live Concert Generator</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <article class="ticket">
+
+    <header class="poster">
+      <p class="presents">Love Live Concert Generator</p>
+      <h1 class="billing" id="billing"></h1>
+      <p class="where-when" id="where-when"></p>
+    </header>
+
+    <p class="status" id="status"></p>
+
+    <section class="order">
+      <h2>Your order</h2>
+
+      <label class="guest-label" for="guest-name">Your name</label>
+      <input class="guest-name" id="guest-name" type="text" placeholder="Type your name" />
+
+      <div class="controls">
+        <div class="stepper">
+          <button id="minus" type="button">−</button>
+          <span id="quantity"></span>
+          <button id="plus" type="button">+</button>
+        </div>
+        <button class="regenerate" id="regenerate" type="button">New concert</button>
+      </div>
+
+      <p class="line" id="price-line"></p>
+      <p class="line" id="fee-line"></p>
+
+      <p class="total">
+        <span>Total</span>
+        <strong id="total"></strong>
+      </p>
+
+      <p class="fine-print" id="fine-print"></p>
+    </section>
+
+    <section class="lineup-wrap">
+      <h2>Running order</h2>
+      <ul class="lineup" id="lineup"></ul>
+      <p class="tagline" id="tagline"></p>
+    </section>
+
+  </article>
+
+  <script>
+    const groups = [
+      {
+        name: "μ's",
+        song: 'Snow halation',
+        venue: 'Tokyo Dome',
+        date: 'November 13'
+      },
+      {
+        name: 'Aqours',
+        song: 'Aozora Jumping Heart',
+        venue: 'Saitama Super Arena',
+        date: 'November 20'
+      },
+      {
+        name: 'Nijigasaki',
+        song: 'TOKIMEKI Runners',
+        venue: 'Yokohama Arena',
+        date: 'December 5'
+      },
+      {
+        name: 'Liella!',
+        song: 'START!! True dreams',
+        venue: 'Osaka Arena',
+        date: 'December 12'
+      }
+    ]
+
+    const members = [
+      'Honoka',
+      'Chika',
+      'Ayumu'
+    ]
+
+    const colours = [
+      '#e88ba8',
+      '#69b7d6'
+    ]
+
+    function pickRandom(array) {
+      return array[Math.floor(Math.random() * array.length)]
+    }
+
+    function randomBetween(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min
+    }
+
+    let group = pickRandom(groups)
+    let member = pickRandom(members)
+    let ticketPrice = randomBetween(30, 80)
+    let ticketsLeft = randomBetween(0, 20)
+    let quantity = ticketsLeft === 0 ? 0 : randomBetween(1, Math.min(4, ticketsLeft))
+    let guestName = ''
+
+    const billingElement = document.querySelector('#billing')
+    const whereWhenElement = document.querySelector('#where-when')
+    const statusElement = document.querySelector('#status')
+    const priceLineElement = document.querySelector('#price-line')
+    const feeLineElement = document.querySelector('#fee-line')
+    const totalElement = document.querySelector('#total')
+    const finePrintElement = document.querySelector('#fine-print')
+    const lineupElement = document.querySelector('#lineup')
+    const taglineElement = document.querySelector('#tagline')
+    const quantityElement = document.querySelector('#quantity')
+    const guestNameElement = document.querySelector('#guest-name')
+    const minusButton = document.querySelector('#minus')
+    const plusButton = document.querySelector('#plus')
+
+    function render() {
+      const subtotal = ticketPrice * quantity
+      const serviceFee = subtotal * 0.10
+      const total = subtotal + serviceFee
+      const isSoldOut = ticketsLeft === 0
+      const isAlmostSoldOut = ticketsLeft > 0 && ticketsLeft < 10
+      const bookingMessage = quantity > 2 ? 'Group booking!' : 'Regular booking!'
+      let status = 'Tickets available!'
+
+      if (isSoldOut) {
+        status = 'Sold out!'
+      } else if (isAlmostSoldOut) {
+        status = `Only ${ticketsLeft} tickets left!`
+      }
+
+      document.body.style.setProperty('--accent', pickRandom(colours))
+      billingElement.textContent = `${group.name} LIVE CONCERT`
+      whereWhenElement.textContent = `${group.venue} · ${group.date}`
+      statusElement.textContent = status
+      quantityElement.textContent = quantity
+      priceLineElement.textContent = `${quantity} × $${ticketPrice.toFixed(2)} = $${subtotal.toFixed(2)}`
+      feeLineElement.textContent = `Service fee = $${serviceFee.toFixed(2)}`
+      totalElement.textContent = `$${total.toFixed(2)}`
+      finePrintElement.textContent = `${guestName || member} is performing! ${bookingMessage}`
+      guestNameElement.value = guestName
+      minusButton.disabled = quantity === 0
+      plusButton.disabled = quantity >= Math.min(4, ticketsLeft)
+
+      const lineup = [
+        'Opening Performance',
+        group.song,
+        `${member} Solo Performance`,
+        'Special Performance',
+        'Final Performance'
+      ]
+
+      lineupElement.innerHTML = ''
+
+      for (let i = 0; i < lineup.length; i++) {
+        const stripe = i % 2 === 0 ? 'stripe' : ''
+        lineupElement.innerHTML += `<li class="${stripe}">${lineup[i]}</li>`
+      }
+
+      taglineElement.textContent = `Enjoy ${group.name} at ${group.venue}!`
+    }
+
+    minusButton.addEventListener('click', function () {
+      if (quantity > 0) {
+        quantity--
+        render()
+      }
+    })
+
+    plusButton.addEventListener('click', function () {
+      if (quantity < Math.min(4, ticketsLeft)) {
+        quantity++
+        render()
+      }
+    })
+
+    document.querySelector('#regenerate').addEventListener('click', function () {
+      group = pickRandom(groups)
+      member = pickRandom(members)
+      ticketPrice = randomBetween(30, 80)
+      ticketsLeft = randomBetween(0, 20)
+      quantity = ticketsLeft === 0 ? 0 : 1
+      render()
+    })
+
+    guestNameElement.addEventListener('input', function (event) {
+      guestName = event.target.value
+      render()
+    })
+
+    render()
+
+  </script>
+
+</body>
+</html>
