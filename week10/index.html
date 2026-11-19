@@ -51,60 +51,143 @@
       <p class="tagline" id="tagline"></p>
     </section>
 
+    <section class="details-wrap">
+      <h2>Show details</h2>
+      <dl class="details" id="details"></dl>
+      <button class="clear-saved" id="clear-saved" type="button">Clear saved show</button>
+    </section>
+
   </article>
 
   <script>
-    const groups = [
+    // JSON.stringify removes methods from an object, so a saved show comes back without its methods; I saw that calling the method after JSON.parse caused an error because JSON stores data but not functions, so I reattach the methods when I load the show.
+    const shows = [
       {
         name: "μ's",
         song: 'Snow halation',
         venue: 'Tokyo Dome',
-        date: 'November 13'
+        date: 'November 13',
+        ticketPrice: 58,
+        ticketsLeft: 12,
+        isIndoor: true,
+        accent: '#e88ba8',
+        featuredMember: 'Honoka',
+        lineup: ['Opening Performance', 'Snow halation', 'Honoka Solo Performance', 'Special Performance', 'Final Performance'],
+        serviceFee(subtotal) {
+          return subtotal * 0.1
+        },
+        statusMessage() {
+          if (this.ticketsLeft === 0) return 'Sold out!'
+          if (this.ticketsLeft < 10) return `Only ${this.ticketsLeft} tickets left!`
+          return 'Tickets available!'
+        }
       },
       {
         name: 'Aqours',
         song: 'Aozora Jumping Heart',
         venue: 'Saitama Super Arena',
-        date: 'November 20'
+        date: 'November 20',
+        ticketPrice: 46,
+        ticketsLeft: 7,
+        isIndoor: true,
+        accent: '#69b7d6',
+        featuredMember: 'Chika',
+        lineup: ['Opening Performance', 'Aozora Jumping Heart', 'Chika Solo Performance', 'Special Performance', 'Final Performance'],
+        serviceFee(subtotal) {
+          return subtotal * 0.1
+        },
+        statusMessage() {
+          if (this.ticketsLeft === 0) return 'Sold out!'
+          if (this.ticketsLeft < 10) return `Only ${this.ticketsLeft} tickets left!`
+          return 'Tickets available!'
+        }
       },
       {
         name: 'Nijigasaki',
         song: 'TOKIMEKI Runners',
         venue: 'Yokohama Arena',
-        date: 'December 5'
+        date: 'December 5',
+        ticketPrice: 39,
+        ticketsLeft: 18,
+        isIndoor: true,
+        accent: '#f1a55b',
+        featuredMember: 'Ayumu',
+        lineup: ['Opening Performance', 'TOKIMEKI Runners', 'Ayumu Solo Performance', 'Special Performance', 'Final Performance'],
+        serviceFee(subtotal) {
+          return subtotal * 0.1
+        },
+        statusMessage() {
+          if (this.ticketsLeft === 0) return 'Sold out!'
+          if (this.ticketsLeft < 10) return `Only ${this.ticketsLeft} tickets left!`
+          return 'Tickets available!'
+        }
       },
       {
         name: 'Liella!',
         song: 'START!! True dreams',
         venue: 'Osaka Arena',
-        date: 'December 12'
+        date: 'December 12',
+        ticketPrice: 52,
+        ticketsLeft: 4,
+        isIndoor: true,
+        accent: '#9b83d5',
+        featuredMember: 'Kanon',
+        lineup: ['Opening Performance', 'START!! True dreams', 'Kanon Solo Performance', 'Special Performance', 'Final Performance'],
+        serviceFee(subtotal) {
+          return subtotal * 0.1
+        },
+        statusMessage() {
+          if (this.ticketsLeft === 0) return 'Sold out!'
+          if (this.ticketsLeft < 10) return `Only ${this.ticketsLeft} tickets left!`
+          return 'Tickets available!'
+        }
+      },
+      {
+        name: 'Hasunosora',
+        song: 'On your mark',
+        venue: 'Kobe World Hall',
+        date: 'December 19',
+        ticketPrice: 43,
+        ticketsLeft: 0,
+        isIndoor: true,
+        accent: '#7cbf9e',
+        featuredMember: 'Kozue',
+        lineup: ['Opening Performance', 'On your mark', 'Kozue Solo Performance', 'Special Performance', 'Final Performance'],
+        serviceFee(subtotal) {
+          return subtotal * 0.1
+        },
+        statusMessage() {
+          if (this.ticketsLeft === 0) return 'Sold out!'
+          if (this.ticketsLeft < 10) return `Only ${this.ticketsLeft} tickets left!`
+          return 'Tickets available!'
+        }
       }
-    ]
-
-    const members = [
-      'Honoka',
-      'Chika',
-      'Ayumu'
-    ]
-
-    const colours = [
-      '#e88ba8',
-      '#69b7d6'
     ]
 
     function pickRandom(array) {
       return array[Math.floor(Math.random() * array.length)]
     }
 
-    function randomBetween(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min
+    function restoreMethods(savedShow) {
+      savedShow.serviceFee = function (subtotal) {
+        return subtotal * 0.1
+      }
+      savedShow.statusMessage = function () {
+        if (this.ticketsLeft === 0) return 'Sold out!'
+        if (this.ticketsLeft < 10) return `Only ${this.ticketsLeft} tickets left!`
+        return 'Tickets available!'
+      }
+      return savedShow
     }
 
-    let group = pickRandom(groups)
-    let member = pickRandom(members)
-    let ticketPrice = randomBetween(30, 80)
-    let ticketsLeft = randomBetween(0, 20)
-    let quantity = ticketsLeft === 0 ? 0 : randomBetween(1, Math.min(4, ticketsLeft))
+    function loadSavedShow() {
+      const rawShow = localStorage.getItem('show')
+      if (!rawShow) return null
+      return restoreMethods(JSON.parse(rawShow))
+    }
+
+    let show = loadSavedShow() || pickRandom(shows)
+    let quantity = show.ticketsLeft === 0 ? 0 : 1
     let guestName = ''
 
     const billingElement = document.querySelector('#billing')
@@ -116,55 +199,50 @@
     const finePrintElement = document.querySelector('#fine-print')
     const lineupElement = document.querySelector('#lineup')
     const taglineElement = document.querySelector('#tagline')
+    const detailsElement = document.querySelector('#details')
     const quantityElement = document.querySelector('#quantity')
     const guestNameElement = document.querySelector('#guest-name')
     const minusButton = document.querySelector('#minus')
     const plusButton = document.querySelector('#plus')
 
     function render() {
-      const subtotal = ticketPrice * quantity
-      const serviceFee = subtotal * 0.10
-      const total = subtotal + serviceFee
-      const isSoldOut = ticketsLeft === 0
-      const isAlmostSoldOut = ticketsLeft > 0 && ticketsLeft < 10
+      const subtotal = show.ticketPrice * quantity
+      const serviceFee = show.serviceFee(subtotal)
       const bookingMessage = quantity > 2 ? 'Group booking!' : 'Regular booking!'
-      let status = 'Tickets available!'
-
-      if (isSoldOut) {
-        status = 'Sold out!'
-      } else if (isAlmostSoldOut) {
-        status = `Only ${ticketsLeft} tickets left!`
-      }
-
-      document.body.style.setProperty('--accent', pickRandom(colours))
-      billingElement.textContent = `${group.name} LIVE CONCERT`
-      whereWhenElement.textContent = `${group.venue} · ${group.date}`
-      statusElement.textContent = status
-      quantityElement.textContent = quantity
-      priceLineElement.textContent = `${quantity} × $${ticketPrice.toFixed(2)} = $${subtotal.toFixed(2)}`
-      feeLineElement.textContent = `Service fee = $${serviceFee.toFixed(2)}`
-      totalElement.textContent = `$${total.toFixed(2)}`
-      finePrintElement.textContent = `${guestName || member} is performing! ${bookingMessage}`
+      document.body.style.setProperty('--accent', show.accent)
+      billingElement.textContent = `${show.name} LIVE CONCERT`
+      whereWhenElement.textContent = `${show.venue} · ${show.date}`
+      statusElement.textContent = show.statusMessage()
+      quantityElement.textContent = show.ticketsLeft === 0 ? '0' : quantity
+      priceLineElement.textContent = `${quantity} × $${show.ticketPrice.toFixed(2)} = $${subtotal.toFixed(2)}`
+      feeLineElement.textContent = `Service fee = $${show.serviceFee(subtotal).toFixed(2)}`
+      totalElement.textContent = `$${(show.ticketPrice * quantity + serviceFee).toFixed(2)}`
+      finePrintElement.textContent = `${guestName || show.featuredMember} is performing! ${bookingMessage}`
       guestNameElement.value = guestName
       minusButton.disabled = quantity === 0
-      plusButton.disabled = quantity >= Math.min(4, ticketsLeft)
-
-      const lineup = [
-        'Opening Performance',
-        group.song,
-        `${member} Solo Performance`,
-        'Special Performance',
-        'Final Performance'
-      ]
+      plusButton.disabled = quantity >= Math.min(4, show.ticketsLeft)
 
       lineupElement.innerHTML = ''
 
-      for (let i = 0; i < lineup.length; i++) {
+      for (let i = 0; i < show.lineup.length; i++) {
         const stripe = i % 2 === 0 ? 'stripe' : ''
-        lineupElement.innerHTML += `<li class="${stripe}">${lineup[i]}</li>`
+        lineupElement.innerHTML += `<li class="${stripe}">${show.lineup[i]}</li>`
       }
 
-      taglineElement.textContent = `Enjoy ${group.name} at ${group.venue}!`
+      taglineElement.textContent = `Enjoy ${show.name} at ${show.venue}!`
+
+      detailsElement.innerHTML = ''
+      const keys = Object.keys(show)
+
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i]
+        if (typeof show[key] === 'function') continue
+        const label = document.createElement('dt')
+        const value = document.createElement('dd')
+        label.textContent = key
+        value.textContent = Array.isArray(show[key]) ? show[key].join(', ') : String(show[key])
+        detailsElement.append(label, value)
+      }
     }
 
     minusButton.addEventListener('click', function () {
@@ -175,18 +253,23 @@
     })
 
     plusButton.addEventListener('click', function () {
-      if (quantity < Math.min(4, ticketsLeft)) {
+      if (quantity < Math.min(4, show.ticketsLeft)) {
         quantity++
         render()
       }
     })
 
     document.querySelector('#regenerate').addEventListener('click', function () {
-      group = pickRandom(groups)
-      member = pickRandom(members)
-      ticketPrice = randomBetween(30, 80)
-      ticketsLeft = randomBetween(0, 20)
-      quantity = ticketsLeft === 0 ? 0 : 1
+      show = pickRandom(shows)
+      quantity = show.ticketsLeft === 0 ? 0 : 1
+      localStorage.setItem('show', JSON.stringify(show))
+      render()
+    })
+
+    document.querySelector('#clear-saved').addEventListener('click', function () {
+      localStorage.removeItem('show')
+      show = pickRandom(shows)
+      quantity = show.ticketsLeft === 0 ? 0 : 1
       render()
     })
 

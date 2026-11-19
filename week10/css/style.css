@@ -1,9 +1,3 @@
-/* ---------------------------------------------------------------
-   The Fillmore East — show page
-   Nothing in here needs changing today. The whole lesson happens
-   in the <script> at the bottom of index.html.
-   --------------------------------------------------------------- */
-
 :root {
   --accent: #e0504f;
   --ink: #16151a;
@@ -39,8 +33,6 @@ body {
   box-shadow: 0 24px 60px rgb(0 0 0 / 0.5);
 }
 
-/* ---------------------------------------------------------- poster */
-
 .poster {
   background: var(--accent);
   color: var(--paper);
@@ -71,8 +63,6 @@ body {
   opacity: 0.9;
 }
 
-/* ---------------------------------------------------------- status */
-
 .status {
   margin: 0;
   padding: 0.6rem 1.5rem;
@@ -83,8 +73,6 @@ body {
   text-transform: uppercase;
   text-align: center;
 }
-
-/* ----------------------------------------------------------- order */
 
 .order {
   padding: 1.5rem;
@@ -157,9 +145,6 @@ body {
   color: var(--paper);
 }
 
-/* an empty line should not leave a gap -- :empty matches an element
-   with nothing in it at all, which is exactly what happens when we
-   set its text to an empty string */
 .line:empty {
   display: none;
 }
@@ -198,8 +183,6 @@ body {
   color: var(--muted);
 }
 
-/* ------------------------------------------------------------ 600 */
-
 @media (max-width: 600px) {
   body {
     padding: 1rem 0.75rem;
@@ -209,10 +192,6 @@ body {
     font-size: 1.6rem;
   }
 }
-
-/* ---------------------------------------------------------- lineup
-   Added for Thursday: the running order, built by a for loop.
-   ------------------------------------------------------------------ */
 
 .lineup-wrap {
   padding: 0 1.5rem 1.5rem;
@@ -239,7 +218,6 @@ body {
   border-bottom: 1px solid var(--line);
 }
 
-/* every other row, courtesy of the modulo operator */
 .lineup li.stripe {
   background: rgb(0 0 0 / 0.045);
 }
@@ -263,4 +241,51 @@ body {
   font-style: italic;
   color: var(--muted);
   text-align: center;
+}
+
+.details-wrap {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.details-wrap h2 {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.details dt,
+.details dd {
+  margin: 0;
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
+}
+
+.details dt {
+  color: var(--muted);
+}
+
+.details dd {
+  overflow-wrap: anywhere;
+}
+
+.clear-saved {
+  width: 100%;
+  margin-top: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0.55rem 0.75rem;
+  background: var(--paper);
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
 }
